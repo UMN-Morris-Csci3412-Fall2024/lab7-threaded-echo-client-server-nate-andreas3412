@@ -2,14 +2,14 @@
 
 ## System Specifications
 
-- Machine: University lab machine (neoprene)
+- Machine: University lab machine
 - CPU: Intel(R) Core(R) i7 (4 cores, 8 threads)
 - RAM: 16GB
 - OS: Linux (CentOS 7)
 
 ## Testing Methodology
 
-I implemented the server using a `CachedThreadPool` for dynamic thread management. Tests were conducted using the provided `words.txt` file (~10,000 lines) with varying numbers of concurrent clients:
+I implemented the server using a ThreadPool for thread management. Tests were conducted using the provided words.txt file with varying numbers of concurrent clients:
 
 - 2 clients: ~1 second completion time
 - 5 clients: ~2.5 seconds completion time
@@ -21,9 +21,8 @@ The execution time scaled roughly linearly with the number of concurrent clients
 
 The thread pool approach demonstrated better resource utilization compared to creating new threads per client, as evidenced by:
 
-1. Stable memory usage across test runs
-2. Consistent response times for each client
-3. No connection failures or data corruption
-4. Efficient handling of concurrent file transfers
+1. Consistent response times for each client
+2. No connection failures or data corruption
+3. Efficient handling of concurrent file transfers
 
 The multi-threaded implementation showed particular efficiency on this multi-core system, allowing parallel processing of client connections without significant overhead from thread creation/destruction.
