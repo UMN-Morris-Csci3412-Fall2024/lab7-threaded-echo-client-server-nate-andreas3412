@@ -24,20 +24,21 @@ public class EchoServer {
 	}
 
 	private void start() throws IOException, InterruptedException {
-		ServerSocket serverSocket = new ServerSocket(PORT_NUMBER);
-		while (true) {
-			Socket socket = serverSocket.accept();
+		try (ServerSocket serverSocket = new ServerSocket(PORT_NUMBER)) {
+			while (true) {
+				Socket socket = serverSocket.accept();
 
-			// Put your code here.
-			// This should do very little, essentially:
-			// * Construct an instance of your runnable class
-			// * Construct a Thread with your runnable
-			// * Or use a thread pool
-			// * Start that thread
+				// Put your code here.
+				// This should do very little, essentially:
+				// * Construct an instance of your runnable class
+				// * Construct a Thread with your runnable
+				// * Or use a thread pool
+				// * Start that thread
 
-			// Submit new client connection to thread pool for handling
-			// This allows multiple clients to be handled concurrently
-			threadPool.submit(new ClientHandler(socket));
+				// Submit new client connection to thread pool for handling
+				// This allows multiple clients to be handled concurrently
+				threadPool.submit(new ClientHandler(socket));
+			}
 		}
 	}
 
